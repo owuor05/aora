@@ -4,12 +4,14 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+ 
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    PoppinsRegular : require('../assets/fonts/Poppins-Regular.ttf'),
+    PoppinsBold : require('../assets/fonts/Poppins-Bold.ttf'),
+    SemiBold : require('../assets/fonts/Poppins-SemiBold.ttf'),
+    Medium :require('../assets/fonts/Poppins-Medium.ttf')
   });
 
   if (!loaded) {
@@ -18,12 +20,14 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+   
+      <Stack screenOptions={{headerShown:false}}>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(home)" options={{ headerShown: false }} />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+     
+   
   );
 }
